@@ -79,3 +79,33 @@ Verify Pages configuration:
 ```bash
 gh api repos/theotheo46/vmt_site/pages
 ```
+
+View log for given run:
+
+```bash
+gh run view <run-id>
+```
+
+View logs for given job:
+
+```bash
+gh run view --job=<job-id>
+```
+
+View logs from a failed run:
+
+```bash
+gh run view <run-id> --log-failed
+```
+
+Re-run a failed deployment:
+
+```bash
+gh run rerun <run-id>
+```
+
+Manually trigger a deployment:
+
+```bash
+gh workflow run deploy.yml
+```
