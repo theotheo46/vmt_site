@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { assetPath } from "@/lib/constants";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     "Эксклюзивный представитель «Мобили Концепт» в России. " +
     "Кабинеты, залы заседаний, лестницы, двери — мебель премиум-класса из массива.",
   icons: {
-    icon: "/images/logo/LogoIcon.png",
+    icon: assetPath("/images/logo/LogoIcon.png"),
   },
 };
 
