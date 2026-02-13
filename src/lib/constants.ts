@@ -20,5 +20,5 @@ export const CONTACT = {
   phone: "+7 (495) 123-45-67",
   phoneHref: "tel:+74951234567",
   email: "info@vm-torg.ru",
-  address: "Москва, Россия",
+  address: "г. Смоленск, ул. Николаева, д. 51, офис В13",
 } as const;
