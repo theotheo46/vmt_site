@@ -40,6 +40,17 @@ export function GallerySection() {
           ))}
         </div>
 
+        {/* Equal layout categories */}
+        {equalLayout.length > 0 && (
+          <div className="mt-20 space-y-16">
+            {equalLayout.map((cat) => (
+              <div key={cat.id} className="rounded-xl bg-white/80 p-6 md:p-8">
+                <CategoryEqual category={cat} />
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Мебель group */}
         {mebelGroup.length > 0 && (
           <div className="mt-20">
@@ -54,17 +65,6 @@ export function GallerySection() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* Equal layout categories */}
-        {equalLayout.length > 0 && (
-          <div className="mt-20 space-y-16">
-            {equalLayout.map((cat) => (
-              <div key={cat.id} className="rounded-xl bg-white/80 p-6 md:p-8">
-                <CategoryEqual category={cat} />
-              </div>
-            ))}
           </div>
         )}
       </div>
