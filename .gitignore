@@ -16,6 +16,9 @@ build/
 # debug
 npm-debug.log*
 
+# playwright MCP
+.playwright-mcp/
+
 # IDE
 .idea/
 .vscode/

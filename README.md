@@ -1,21 +1,63 @@
-# VMT Site
+# ВМ-Торг — Эксклюзивная мебель на заказ
 
-Static website built with Next.js 16, deployed to GitHub Pages.
+Presentation website for ООО «ВМ-Торг» — exclusive Russian representative of Belarusian furniture manufacturer «Мобили Концепт». The site showcases premium handcrafted furniture: executive offices, boardrooms, staircases, doors, and custom cabinetry.
 
 **Live**: https://theotheo46.github.io/vmt_site/
+
+## About
+
+A single-page scrollable site with 6 anchor sections and sticky navigation, designed around a luxury dark brown + gold palette with serif typography. All content is in Russian.
+
+### Sections
+
+- **Hero** — Split layout with hero photo and brand introduction
+- **Philosophy** — Company values: natural materials, handcraft, individual approach
+- **Production** — Key stats: 15 years, 2000 m² factory, 21 craftsmen, 100+ projects
+- **Process** — 5-step workflow from consultation to warranty
+- **Gallery** — 10 furniture categories with 43 photographs and lightbox viewer
+- **Contact** — Phone, email, address with call-to-action heading
+
+### Gallery Categories
+
+Кабинеты руководителей, Залы заседаний, Столы для переговорных, Лестницы, Двери, Встроенная мебель, Бытовая мебель, Мягкая мебель, Гардеробные, Стойки ресепшн
 
 ## Tech Stack
 
 - **Next.js 16** — App Router with static export
 - **React 19** — UI library
-- **Tailwind CSS v4** — Utility-first styling
-- **shadcn/ui** — Radix-based component library
+- **TypeScript** — Strict typing throughout
+- **Tailwind CSS v4** — Utility-first styling with custom brand tokens
+- **shadcn/ui** — Radix-based component library (Button, Card, Sheet, Separator, ScrollArea)
+- **Motion** — Scroll-triggered section animations
+- **Lucide React** — Icon library
 - **GitHub Pages** — Hosting via Actions workflow
+
+## Project Structure
+
+- `src/app/` — Next.js App Router (single page + layout)
+- `src/components/layout/` — Header (sticky nav + mobile menu) and Footer
+- `src/components/sections/` — 6 page sections (hero, philosophy, production, process, gallery, contact)
+- `src/components/gallery/` — Gallery sub-components (category blocks, lightbox modal)
+- `src/components/shared/` — Reusable primitives (BasePathImage, AnimatedSection, StatCard, etc.)
+- `src/components/ui/` — shadcn/ui base components
+- `src/data/` — Content data (categories, stats, process steps)
+- `src/types/` — TypeScript interfaces
+- `src/lib/` — Utilities and constants (basePath helper, nav items, contact info)
+- `src/hooks/` — Custom hooks (active section observer)
+- `public/images/` — Optimized photos organized by category
+- `source_img/` — Original source images (Cyrillic folder names)
+- `scripts/` — Image pipeline script
 
 ## Development
 
+Install dependencies, copy source images, and start the dev server.
+
 ```bash
 npm install
+```
+
+```bash
+npm run copy-images
 ```
 
 ```bash
@@ -23,6 +65,8 @@ npm run dev
 ```
 
 Open http://localhost:3000/vmt_site
+
+The `copy-images` script maps Cyrillic source folders to Latin slugs and sanitizes filenames for web compatibility.
 
 ## Validation
 
@@ -38,17 +82,13 @@ Runs `format:check` → `lint` → `typecheck` in sequence.
 npm run build
 ```
 
-Produces static export in `out/` directory.
+Static export produces the `out/` directory ready for deployment. All pages are pre-rendered at build time — no server-side features are used.
 
 ## Deployment
 
-Automatic via GitHub Actions on push to `main`. The workflow:
+Automatic via GitHub Actions on push to `main`. The workflow builds the static site, uploads to GitHub Pages artifact, and deploys to the live URL.
 
-1. Builds the static site
-2. Uploads to GitHub Pages artifact
-3. Deploys to https://theotheo46.github.io/vmt_site/
-
-## GitHub CLI Commands Used
+## GitHub CLI Commands
 
 Create the repository:
 
@@ -115,3 +155,12 @@ Manually trigger a deployment:
 ```bash
 gh workflow run deploy.yml
 ```
+
+## Design Decisions
+
+- **Static export** — No backend needed for a presentation site; GitHub Pages provides free, fast hosting
+- **basePath handling** — Production uses `/vmt_site/` prefix for GitHub Pages; dev uses root. A `BasePathImage` wrapper and `assetPath()` helper centralize this logic
+- **Data-driven content** — Categories, stats, and process steps live in typed data files, making content updates independent of component logic
+- **Scroll animations** — `AnimatedSection` wrapper uses IntersectionObserver via Motion for fade-in effects without impacting initial load
+- **Mobile-first navigation** — Desktop shows inline links; mobile uses a slide-in Sheet panel with the same nav items
+- **Image pipeline** — Source images with Cyrillic names and spaces are normalized to URL-safe Latin slugs via the copy script
