@@ -4,7 +4,7 @@ import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionLabel } from "@/components/shared/section-label";
 import { CategoryBlock } from "@/components/gallery/category-block";
 import { CategoryEqual } from "@/components/gallery/category-equal";
-import { categories, MEBEL_IDS } from "@/data/categories";
+import { categories, MEBEL_IDS } from "@/data/gallery";
 
 const EQUAL_LAYOUT_IDS = ["garderobnye", "stoyki-resepshn"];
 

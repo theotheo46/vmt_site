@@ -2,6 +2,7 @@ import { TreePine, Gem, Settings } from "lucide-react";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionLabel } from "@/components/shared/section-label";
 import { BasePathImage } from "@/components/shared/base-path-image";
+import { sectionImages } from "@/data/generated/gallery-images";
 
 const PILLARS = [
   {
@@ -54,8 +55,8 @@ export function PhilosophySection() {
         {/* Image */}
         <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
           <BasePathImage
-            src="/images/kabinety/9425a3b2-5d21-4d7f-b3ef-63e0aee23037.JPG"
-            alt="Резьба по дереву — деталь кабинета"
+            src={sectionImages.philosophy.src}
+            alt={sectionImages.philosophy.alt}
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"

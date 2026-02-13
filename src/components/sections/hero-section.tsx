@@ -1,4 +1,5 @@
 import { BasePathImage } from "@/components/shared/base-path-image";
+import { sectionImages } from "@/data/generated/gallery-images";
 
 export function HeroSection() {
   return (
@@ -6,8 +7,8 @@ export function HeroSection() {
       {/* Photo side */}
       <div className="relative h-[50vh] w-full md:h-auto md:w-[55%]">
         <BasePathImage
-          src="/images/hero/main_IMG_7144.jpg"
-          alt="Кабинет из массива дерева — ВМ-Торг"
+          src={sectionImages.hero.src}
+          alt={sectionImages.hero.alt}
           fill
           priority
           className="object-cover"

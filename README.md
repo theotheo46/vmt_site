@@ -40,33 +40,67 @@ A single-page scrollable site with 6 anchor sections and sticky navigation, desi
 - `src/components/gallery/` — Gallery sub-components (category blocks, lightbox modal)
 - `src/components/shared/` — Reusable primitives (BasePathImage, AnimatedSection, StatCard, etc.)
 - `src/components/ui/` — shadcn/ui base components
-- `src/data/` — Content data (categories, stats, process steps)
+- `src/data/` — Content data (category metadata, stats, process steps)
+- `src/data/generated/` — Auto-generated image data (do not edit manually)
 - `src/types/` — TypeScript interfaces
 - `src/lib/` — Utilities and constants (basePath helper, nav items, contact info)
 - `src/hooks/` — Custom hooks (active section observer)
-- `public/images/` — Optimized photos organized by category
-- `source_img/` — Original source images (Cyrillic folder names)
-- `scripts/` — Image pipeline script
+- `public/images/` — Photos organized by category (source of truth for gallery)
+- `scripts/` — Build-time scripts (image data generator, legacy image copier)
 
 ## Development
 
-Install dependencies, copy source images, and start the dev server.
-
 ```bash
 npm install
-```
-
-```bash
-npm run copy-images
-```
-
-```bash
 npm run dev
 ```
 
 Open http://localhost:3000/vmt_site
 
-The `copy-images` script maps Cyrillic source folders to Latin slugs and sanitizes filenames for web compatibility.
+## Managing Images
+
+All images are **auto-discovered** from the filesystem at build time. No code changes needed — just add or remove files in `public/images/`.
+
+### How it works
+
+The `generate-gallery` script scans `public/images/` and writes `src/data/generated/gallery-images.ts` with all discovered image paths. This runs automatically on every `npm run build` (via the `prebuild` hook).
+
+### Directory conventions
+
+| Directory                   | Purpose                                                                |
+| --------------------------- | ---------------------------------------------------------------------- |
+| `public/images/<category>/` | Gallery images for a category (e.g. `kabinety/`, `dveri/`)             |
+| `public/images/<section>/`  | Section image (e.g. `hero/`, `philosophy/`) — first file found is used |
+| `public/images/logo/`       | Logo files (skipped by the scanner)                                    |
+
+Section image directories are configured in `SECTION_IMAGES` inside `scripts/generate-gallery-images.mjs`. Current sections: `hero`, `philosophy`.
+
+### File naming
+
+- **`main_` prefix** — marks the main (hero) image for a category (e.g. `main_IMG_7144.jpg`)
+- **All other files** — become secondary gallery images, sorted alphabetically
+- Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`
+- Dotfiles are ignored
+
+### Common tasks
+
+**Add a gallery image:** drop the file into `public/images/<category>/` and run `npm run generate-gallery`.
+
+**Change a category's main image:** rename the desired file to start with `main_` (and remove the prefix from the old one).
+
+**Change a section image (hero, philosophy, etc.):** replace the file in `public/images/<section>/`.
+
+**Add a new section image:** add an entry to `SECTION_IMAGES` in `scripts/generate-gallery-images.mjs`, create `public/images/<section>/` with the image, and import `sectionImages.<section>` in the component.
+
+**Add a new category:** add an entry to `categoryMeta` in `src/data/categories.ts`, then create the matching directory in `public/images/`.
+
+After any image change, run:
+
+```bash
+npm run generate-gallery
+```
+
+Or just build — the `prebuild` hook runs the generator automatically.
 
 ## Validation
 
@@ -82,7 +116,7 @@ Runs `format:check` → `lint` → `typecheck` in sequence.
 npm run build
 ```
 
-Static export produces the `out/` directory ready for deployment. All pages are pre-rendered at build time — no server-side features are used.
+The `prebuild` hook auto-generates gallery image data, then Next.js produces the `out/` directory ready for deployment. All pages are pre-rendered at build time — no server-side features are used.
 
 ## Deployment
 
@@ -160,7 +194,7 @@ gh workflow run deploy.yml
 
 - **Static export** — No backend needed for a presentation site; GitHub Pages provides free, fast hosting
 - **basePath handling** — Production uses `/vmt_site/` prefix for GitHub Pages; dev uses root. A `BasePathImage` wrapper and `assetPath()` helper centralize this logic
-- **Data-driven content** — Categories, stats, and process steps live in typed data files, making content updates independent of component logic
+- **Data-driven content** — Categories, stats, and process steps live in typed data files; gallery images are auto-discovered from the filesystem at build time
 - **Scroll animations** — `AnimatedSection` wrapper uses IntersectionObserver via Motion for fade-in effects without impacting initial load
 - **Mobile-first navigation** — Desktop shows inline links; mobile uses a slide-in Sheet panel with the same nav items
-- **Image pipeline** — Source images with Cyrillic names and spaces are normalized to URL-safe Latin slugs via the copy script
+- **Image auto-discovery** — A build-time script scans `public/images/` and generates a TypeScript module with all image paths, so adding a photo requires zero code changes
