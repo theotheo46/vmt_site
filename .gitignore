@@ -29,3 +29,5 @@ next-env.d.ts
 
 # source images (large files)
 source_img/
+doc/
+screenshots/

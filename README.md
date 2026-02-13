@@ -92,6 +92,12 @@ View logs for given job:
 gh run view --job=<job-id>
 ```
 
+View full logs for given job:
+
+```bash
+gh run view --log --job=63431489108
+```
+
 View logs from a failed run:
 
 ```bash
