@@ -34,10 +34,7 @@ export function GallerySection() {
         {/* Standalone categories */}
         <div className="mt-16 space-y-20">
           {standalone.map((cat, i) => (
-            <div
-              key={cat.id}
-              className={`rounded-xl p-6 md:p-8 ${i % 2 === 0 ? "bg-cream/50" : "bg-white"}`}
-            >
+            <div key={cat.id} className="rounded-xl bg-white/80 p-6 md:p-8">
               <CategoryBlock category={cat} reverse={i % 2 === 1} />
             </div>
           ))}
@@ -52,10 +49,7 @@ export function GallerySection() {
             <div className="bg-gold mx-auto mt-4 h-1 w-16" />
             <div className="mt-12 space-y-16">
               {mebelGroup.map((cat, i) => (
-                <div
-                  key={cat.id}
-                  className={`rounded-xl p-6 md:p-8 ${i % 2 === 0 ? "bg-cream/50" : "bg-white"}`}
-                >
+                <div key={cat.id} className="rounded-xl bg-white/80 p-6 md:p-8">
                   <CategoryBlock category={cat} reverse={i % 2 === 1} />
                 </div>
               ))}
@@ -66,11 +60,8 @@ export function GallerySection() {
         {/* Equal layout categories */}
         {equalLayout.length > 0 && (
           <div className="mt-20 space-y-16">
-            {equalLayout.map((cat, i) => (
-              <div
-                key={cat.id}
-                className={`rounded-xl p-6 md:p-8 ${i % 2 === 0 ? "bg-cream/50" : "bg-white"}`}
-              >
+            {equalLayout.map((cat) => (
+              <div key={cat.id} className="rounded-xl bg-white/80 p-6 md:p-8">
                 <CategoryEqual category={cat} />
               </div>
             ))}
