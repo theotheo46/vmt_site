@@ -39,9 +39,10 @@ export const galleryImages: Record<string, GalleryEntry> = {
   lestnitsy: {
     mainImage: { src: "/images/lestnitsy/main_photo_2022-09-20_18-33-00.jpg", alt: "Лестницы" },
     secondaryImages: [
-      { src: "/images/lestnitsy/photo_2022-09-20_18-30-31.jpg", alt: "Лестницы — 1" },
-      { src: "/images/lestnitsy/photo_2022-09-20_18-30-38.jpg", alt: "Лестницы — 2" },
-      { src: "/images/lestnitsy/photo_2022-09-20_18-33-02.jpg", alt: "Лестницы — 3" },
+      { src: "/images/lestnitsy/IMG_20191003_171255.jpg", alt: "Лестницы — 1" },
+      { src: "/images/lestnitsy/photo_2022-09-20_18-30-31.jpg", alt: "Лестницы — 2" },
+      { src: "/images/lestnitsy/photo_2022-09-20_18-30-38.jpg", alt: "Лестницы — 3" },
+      { src: "/images/lestnitsy/photo_2022-09-20_18-33-02.jpg", alt: "Лестницы — 4" },
     ],
   },
   "mebel-bytovaya": {
@@ -61,7 +62,8 @@ export const galleryImages: Record<string, GalleryEntry> = {
     secondaryImages: [
       { src: "/images/mebel-myagkaya/2014-01-14_12.18.21.jpg", alt: "Мягкая мебель — 1" },
       { src: "/images/mebel-myagkaya/2014-01-14_12.21.29.jpg", alt: "Мягкая мебель — 2" },
-      { src: "/images/mebel-myagkaya/photo_2022-09-20_18-42-51.jpg", alt: "Мягкая мебель — 3" },
+      { src: "/images/mebel-myagkaya/photo_2022-09-20_18-29-41.jpg", alt: "Мягкая мебель — 3" },
+      { src: "/images/mebel-myagkaya/photo_2022-09-20_18-42-51.jpg", alt: "Мягкая мебель — 4" },
     ],
   },
   "mebel-vstroennaya": {

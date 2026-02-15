@@ -16,6 +16,8 @@ export const NAV_ITEMS = [
 
 export const SECTION_IDS = ["philosophy", "production", "process", "gallery", "contact"] as const;
 
+export const HERO_VIDEO_SRC = "/video/office_no_logo.mp4";
+
 export const CONTACT = {
   phone: "+7 (495) 123-45-67",
   phoneHref: "tel:+74951234567",

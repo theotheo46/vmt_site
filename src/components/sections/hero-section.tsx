@@ -1,23 +1,37 @@
-import { BasePathImage } from "@/components/shared/base-path-image";
-import { sectionImages } from "@/data/generated/gallery-images";
+"use client";
+
+import { useEffect, useRef } from "react";
+
+import { assetPath, HERO_VIDEO_SRC } from "@/lib/constants";
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play();
+    }
+  }, []);
+
   return (
     <section className="relative flex min-h-screen flex-col md:flex-row">
-      {/* Photo side */}
-      <div className="relative h-[50vh] w-full md:h-auto md:w-[55%]">
-        <BasePathImage
-          src={sectionImages.hero.src}
-          alt={sectionImages.hero.alt}
-          fill
-          priority
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 55vw"
+      {/* Video side */}
+      <div className="relative h-[50vh] w-full md:h-auto md:w-[70%]">
+        <video
+          ref={videoRef}
+          src={assetPath(HERO_VIDEO_SRC)}
+          autoPlay
+          muted
+          playsInline
+          disablePictureInPicture
+          className="h-full w-full object-cover"
         />
       </div>
 
       {/* Dark panel */}
-      <div className="bg-dark-brown flex w-full flex-col items-center justify-center px-8 py-16 md:w-[45%] md:py-0">
+      <div className="bg-dark-brown flex w-full flex-col items-center justify-center px-8 py-16 md:w-[30%] md:py-0">
         <div className="max-w-md text-center">
           <h1 className="text-gold font-serif text-4xl font-bold tracking-[0.25em] md:text-5xl lg:text-6xl">
             ВМ-ТОРГ
